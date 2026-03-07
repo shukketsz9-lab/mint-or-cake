@@ -15,7 +15,7 @@
 - **플레이 하기:** [https://shukketsz9-lab.github.io/mint-or-cake/](https://shukketsz9-lab.github.io/mint-or-cake/)
 
 ### 제작자 정보
-콘텐츠 제작 및 개발 관련 소식은 아래 채널에서 확인하실 수 있습니다.
+콘텐츠 제작 및 개발 관련 소식은 아래 채널에서 확인하실 수 있스빈다
 - **제작자 유튜브:** [https://www.youtube.com/@Shukketsz](https://www.youtube.com/@Shukketsz)
 
 ### 저작권 안내
