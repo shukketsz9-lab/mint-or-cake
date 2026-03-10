@@ -54,6 +54,7 @@
             width: 100%;
             height: auto;
             border-radius: 15px;
+            cursor: pointer; /* 클릭 가능하다는 표시 추가 */
         }
 
         #center-zone {
@@ -129,7 +130,6 @@
 
         #help { margin-top: 30px; color: #444; font-size: 1.2rem; background: #fff; padding: 10px 20px; border-radius: 50px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        /* 카운트다운 스타일 추가 */
         #countdown-display {
             position: absolute;
             font-size: 8rem;
@@ -168,7 +168,7 @@
     </div>
 
     <div id="help">
-        <b>민트초코가 나왔다면 왼쪽 방향키를 눌러 죠안에게 주세요!</b> | <b>케이크가 나왔다면 오른쪽 방향키를 눌러 에르핀에게 주세요!</b>
+        <b>민트초코가 나왔다면 죠안을 누르세요!</b> | <b>케이크가 나왔다면 에르핀을 누르세요!</b>
     </div>
 
     <div id="overlay" class="hidden">
@@ -188,7 +188,6 @@
         const finalScoreText = document.getElementById('final-score-text');
         const countdownDisplay = document.getElementById('countdown-display');
 
-        // 오디오 객체 생성
         const flySound = new Audio('resources/날아가는소리.mp3');
         const erpinCrySound = new Audio('resources/에르핀우는소리.mp3');
         const joanneTrialSound = new Audio('resources/이런시련을던져주시다니.mp3');
@@ -199,7 +198,6 @@
         let currentFoodType = null;
         let timerInterval;
 
-        // 카운트다운 함수 추가
         function startCountdown() {
             startBtn.classList.add('hidden');
             overlay.classList.add('hidden');
@@ -216,7 +214,7 @@
                 } else {
                     clearInterval(countInterval);
                     countdownDisplay.classList.add('hidden');
-                    initGame(); // 실제 게임 시작
+                    initGame();
                 }
             }, 1000);
         }
@@ -261,7 +259,6 @@
             const food = document.getElementById('active-food');
             if (!food || food.classList.contains('fly-left') || food.classList.contains('fly-right')) return;
 
-            // 1. 방향키 입력 시 날아가는 소리 재생
             flySound.currentTime = 0; 
             flySound.play();
 
@@ -282,7 +279,6 @@
                     updateScore(1, 0.4);
                     changeEmotion(joanneImg, 'resources/eatingjoanne.gif', 'resources/joanne.gif');
                 } else {
-                    // 3. 케이크를 죠안에게 주면 시련 소리 재생
                     joanneTrialSound.currentTime = 0;
                     joanneTrialSound.play();
                     updateScore(-1, -1.0);
@@ -293,7 +289,6 @@
                     updateScore(1, 0.4);
                     changeEmotion(erpinImg, 'resources/eatingerpin.gif', 'resources/erpin.gif');
                 } else {
-                    // 2. 민트초코를 에르핀에게 주면 우는 소리 재생
                     erpinCrySound.currentTime = 0;
                     erpinCrySound.play();
                     updateScore(-1, -1.0);
@@ -328,7 +323,11 @@
             if (e.key === 'ArrowRight') handleInput('right');
         });
 
-        // 시작 버튼 클릭 시 카운트다운부터 실행
+        // --- 추가된 기능: 모바일 및 클릭 지원 ---
+        joanneImg.addEventListener('click', () => handleInput('left'));
+        erpinImg.addEventListener('click', () => handleInput('right'));
+        // ------------------------------------
+
         startBtn.addEventListener('click', startCountdown);
         restartBtn.addEventListener('click', startCountdown);
     </script>
